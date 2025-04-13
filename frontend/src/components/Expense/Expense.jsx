@@ -26,7 +26,7 @@ function Expense() {
 
     try {
       const response = await axiosInstance.get(`${API_PATHS.EXPENSE.GET_ALL_EXPENSE}`)
-      console.log("All Expenses:", response);
+      // console.log("All Expenses:", response);
       
       if(response.data){
         setExpenseData(response.data.data)
@@ -72,7 +72,7 @@ function Expense() {
   }
 
   const deleteExpense = async (id) => {
-    console.log("Delete clicked id: ", id);
+    // console.log("Delete clicked id: ", id);
     try {
       await axiosInstance.delete(API_PATHS.EXPENSE.DELETE_EXPENSE(id));
       setOpenDeleteAlert({open: false, data: null});

@@ -29,7 +29,7 @@ function Home() {
 
     try {
       const res = await axiosInstance.get(`${API_PATHS.DASHBOARD.GET_DATA}`);
-      console.log('Dashboard Data: ', res.data);
+      // console.log('Dashboard Data: ', res.data);
 
       if (res.data) {
         setDashboardData(res.data);

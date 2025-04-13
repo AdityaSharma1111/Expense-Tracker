@@ -26,7 +26,7 @@ function Income() {
 
     try {
       const response = await axiosInstance.get(`${API_PATHS.INCOME.GET_ALL_INCOME}`)
-      console.log("All incomes:", response);
+      // console.log("All incomes:", response);
       
       if(response.data){
         setIncomeData(response.data.data)
@@ -72,7 +72,7 @@ function Income() {
   }
 
   const deleteIncome = async (id) => {
-    console.log("Delete clicked id: ", id);
+    // console.log("Delete clicked id: ", id);
     try {
       await axiosInstance.delete(API_PATHS.INCOME.DELETE_INCOME(id));
       setOpenDeleteAlert({open: false, data: null});
