@@ -53,12 +53,8 @@ function Signup() {
       if (profilePic) {
         formData.append("avatar", profilePic); // key = avatar
       }
-
-      const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
-      });
+      
+      const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, formData);
       
       // console.log("Signup Response:", response.data);
       const { accessToken, user } = response.data.data;
@@ -73,9 +69,9 @@ function Signup() {
         navigate("/dashboard");
       }
     } catch (error) {
-      // console.log(error);
+      console.log(error);
       
-      setError(error.response.data.message);
+      setError(error.message);
     }
   };
 
