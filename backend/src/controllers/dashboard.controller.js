@@ -1,6 +1,6 @@
 import { Income } from "../models/income.model.js";
 import { Expense } from "../models/expense.model.js";
-import { ApiError } from "../utils/apiError.js";
+import { ApiError } from "../utils/ApiError.js";
 import { isValidObjectId, Types } from "mongoose";
 import { ObjectId } from "mongodb"; 
 import { GoogleGenerativeAI } from "@google/generative-ai";
