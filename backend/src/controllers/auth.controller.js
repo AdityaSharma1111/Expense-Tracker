@@ -41,7 +41,7 @@ const register = async (req, res) => {
         avatarLocalPath = req.file.path;
     }
     // console.log(avatarLocalPath);
-    console.log("Saved file path:", req.file.path);
+    // console.log("Saved file path:", req.file.path);
 
 
     const avatarUrl = await uploadOnCloudinary(avatarLocalPath);
