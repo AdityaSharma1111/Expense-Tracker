@@ -45,6 +45,7 @@ function Signup() {
 
       setError('');
       // Send a POST request to the server
+      // console.log(name, email, password, profilePic);
       
       const formData = new FormData();
       formData.append("fullName", name);
@@ -53,8 +54,13 @@ function Signup() {
       if (profilePic) {
         formData.append("avatar", profilePic); // key = avatar
       }
+      // console.log("Check...", formData);
       
-      const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, formData);
+      const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data', // override the default
+        },
+      });
       
       // console.log("Signup Response:", response.data);
       const { accessToken, user } = response.data.data;

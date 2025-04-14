@@ -27,7 +27,7 @@ const generateAccessAndRefereshTokens = async (userId) => {
 
 const register = async (req, res) => {
     const { email, password, fullName } = req.body;
-
+    // console.log("Email:", email);
     if ([fullName, email, password].some((field) => field?.trim() === "")) {
         throw new ApiError(400, "All fields are required.");
     }
@@ -36,11 +36,11 @@ const register = async (req, res) => {
     if (existingUser) {
         throw new ApiError(409, "Email already exists!!");
     }
-
     let avatarLocalPath;
     if (req.file) {
         avatarLocalPath = req.file.path;
     }
+    // console.log(avatarLocalPath);
 
     const avatarUrl = await uploadOnCloudinary(avatarLocalPath);
 
