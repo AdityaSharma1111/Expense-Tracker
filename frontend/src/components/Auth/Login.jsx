@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { API_PATHS } from '../../utils/ApiPaths'
 import axiosInstance from '../../utils/axiosInstance.js'
 import { UserContext } from '../../context/UserContext.jsx'
+import { toast } from 'react-hot-toast';
 
 function Login() {
   const [email, setEmail] = useState("")
@@ -21,27 +22,26 @@ function Login() {
   
   const handleLogin = async (e) => {
     e.preventDefault();
-    
+    if(!validateEmail(email)) {
+      setError("Invalid email address")
+      return
+    }
+    if(!password) {
+      setError("Password is required")
+      return
+    }
+    setError("")
+    let toastId;
     try {
-      if(!validateEmail(email)) {
-        setError("Invalid email address")
-        return
-      }
-      if(!password) {
-        setError("Password is required")
-        return
-      }
-      setError("")
       // Send a POST request to the server
-
       try {
+        toastId = toast.loading('Logging you in... Please wait.');
         const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
           email,
           password
         });
         
         // console.log("Login Response:", response.data);
-
         
         const { accessToken, user } = response.data.data;
         // console.log("Full response:", response);
@@ -54,11 +54,13 @@ function Login() {
           localStorage.setItem("token", accessToken);
           localStorage.setItem("user", JSON.stringify(user));
           setUser(user);
+          toast.success('Welcome Back!!', { id: toastId });
           navigate("/dashboard");
         }        
       } catch (error) {      
         console.log(error);
         setError(error.response.data.message)
+        toast.error('Signup failed', { id: toastId });
       }
 
     

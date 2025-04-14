@@ -7,7 +7,7 @@ function ExpenseList({ transactions, onDelete, onDownload }) {
   return (
     <div className='mt-8'>
       <div className="flex items-center justify-between mb-4">
-        <h5 className="text-lg font-semibold text-gray-800">Expense Category</h5>
+        <h5 className="text-lg font-semibold text-gray-800 dark:text-white">Expense Category</h5>
         <button
           className="p-2 bg-blue-100 hover:bg-blue-200 text-blue-600 rounded-lg transition duration-200"
           onClick={onDownload}
