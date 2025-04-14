@@ -62,7 +62,7 @@ function Signup() {
         },
       });
       
-      console.log("Signup Response:", response.data);
+      // console.log("Signup Response:", response.data);
       const { accessToken, user } = response.data.data;
       // console.log("Response Data:", response.data.data);
       
