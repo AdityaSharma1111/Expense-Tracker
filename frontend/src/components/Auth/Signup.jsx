@@ -5,6 +5,7 @@ import ProfilePicSelector from './ProfilePicSelector';
 import { API_PATHS } from '../../utils/ApiPaths';
 import axiosInstance from '../../utils/axiosInstance.js';
 import { UserContext } from '../../context/UserContext.jsx';
+import { toast } from 'react-hot-toast';
 
 function Signup() {
   const [profilePic, setProfilePic] = useState('');
@@ -12,6 +13,7 @@ function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -24,38 +26,39 @@ function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
 
+    if (!name) {
+      setError('Name is required');
+      return;
+    }
+    if (!validateEmail(email)) {
+      setError('Invalid email address');
+      return;
+    }
+    if (!password) {
+      setError('Password is required');
+      return;
+    }
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    setError('');
+    // Send a POST request to the server
+    // console.log(name, email, password, profilePic);
+    
+    const formData = new FormData();
+    formData.append("fullName", name);
+    formData.append("email", email);
+    formData.append("password", password);
+    if (profilePic) {
+      formData.append("avatar", profilePic); // key = avatar
+    }
+
+    let toastId;
     try {
+      toastId = toast.loading('Creating your account...');
 
-      if (!name) {
-        setError('Name is required');
-        return;
-      }
-      if (!validateEmail(email)) {
-        setError('Invalid email address');
-        return;
-      }
-      if (!password) {
-        setError('Password is required');
-        return;
-      }
-      if (password !== confirmPassword) {
-        setError('Passwords do not match');
-        return;
-      }
-
-      setError('');
-      // Send a POST request to the server
-      // console.log(name, email, password, profilePic);
-      
-      const formData = new FormData();
-      formData.append("fullName", name);
-      formData.append("email", email);
-      formData.append("password", password);
-      if (profilePic) {
-        formData.append("avatar", profilePic); // key = avatar
-      }
-      // console.log("Check...", formData);
-      
       const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, formData, {
         headers: {
           'Content-Type': 'multipart/form-data', // override the default
@@ -72,12 +75,13 @@ function Signup() {
         localStorage.setItem("token", accessToken);
         localStorage.setItem("user", JSON.stringify(user));
         setUser(user);
+        toast.success('Account created!', { id: toastId });
         navigate("/dashboard");
       }
     } catch (error) {
       console.log(error);
-      
       setError(error.message);
+      toast.error('Signup failed', { id: toastId });
     }
   };
 
