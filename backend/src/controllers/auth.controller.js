@@ -43,7 +43,8 @@ const register = async (req, res) => {
     // console.log(avatarLocalPath);
 
     const avatarUrl = await uploadOnCloudinary(avatarLocalPath);
-
+    console.log(avatarUrl);
+    
     const user = await User.create({
         fullName,
         avatar: avatarUrl || "",
