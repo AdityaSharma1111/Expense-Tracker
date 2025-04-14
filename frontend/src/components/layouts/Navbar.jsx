@@ -18,7 +18,7 @@ const Navbar = ({ activeMenu, open, toggleMenu }) => {
         )}
       </button>
       <AISummary />
-      <h2 className="text-xl font-bold">Expense Trackerrrrr</h2>
+      <h2 className="text-xl font-bold">Expense Tracker</h2>
     </div>
   );
 };

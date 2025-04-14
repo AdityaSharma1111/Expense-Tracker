@@ -73,7 +73,7 @@ function Login() {
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
         <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
           <h3 className="text-2xl font-semibold text-center text-gray-800 mb-4">Welcome Back!!</h3>
-          <p className="text-gray-600 text-center mb-6">Please enter your details:</p>
+          <p className="text-gray-600 text-center mb-6">Please enter your detailss:</p>
 
           <form onSubmit={handleLogin} className="space-y-4">
             <Input 
